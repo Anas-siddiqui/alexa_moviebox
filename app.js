@@ -12,24 +12,73 @@ var users = require('./routes/users');
  var request = require("request");
 var app = express();
 //
+var to_search="";
  var final_result;
+var json_final="";
+
 app.get('/signup', function(req, res) {
    // var username = req.body.username;
     //var password = req.body.password;
   //  console.log("post received: %s %s", username, password);
-
-    var temp;
-  request({
-        url: "http://www.tastekid.com/api/similar?q=movie:inception&type=movies&k=245364-testapp-KMQ4HDHR",
+    json_final="";
+    to_search="Fast and furious";
+   request({
+        url: "http://www.tastekid.com/api/similar?q=movie:"+to_search+"&type=movies&k=245364-testapp-KMQ4HDHR",
         json: true
     }, function (error, response, body) {
+       
 
         if (!error && response.statusCode === 200) {
-          // res.send(body.Similar.Results[0].Name); //Print the json response
-           temp=body;
-            res.send(temp);
+          
+            if(body.Similar.Results[0]!=null || body.Similar.Info[0].Type!="unkown"){
+                var count= body.Similar.Results.length;
+            if(count>5)
+            {
+                for(var i=1;i<=5;i++){
+                    if(i==5){    json_final+=body.Similar.Results[i].Name}
+                    else{
+                    json_final+=body.Similar.Results[i].Name+", "}
+                }
+                
+            } 
+               
+          
+     res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Some similar movies are "+
+           json_final+
+            "</speak>"
+        }
+      }
+    });
+            }
+            else{
+                  res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak> Cannot find with this name"
+            
+         
+           
+        }
+      }
+    });
+            }
+     
+          
+            
+             
         }
     });
+    
+      
 
 
     
@@ -70,7 +119,11 @@ function requestVerifier(req, res, next) {
         }
     );
 }
+  function get_movies(req, res, next) {
+
+      
     
+}  
 
 
 // catch 404 and forward to error handler
@@ -89,43 +142,71 @@ app.post('/result',  function(req, res) {
       // Handle this error by producing a response like:
       // "Hmm, what day do you want to know the forecast for?"
     }
-    let to_search = req.body.request.intent.slots.movie_name.value;
+    to_search = req.body.request.intent.slots.movie_name.value;
       console.log("received= "+to_search);
-     
+     json_final="";
 
-    // Do your business logic to get weather data here!
-    // Then send a JSON response...
-     
- request({
+    request({
         url: "http://www.tastekid.com/api/similar?q=movie:"+to_search+"&type=movies&k=245364-testapp-KMQ4HDHR",
         json: true
     }, function (error, response, body) {
+       
 
         if (!error && response.statusCode === 200) {
-           //Print the json response
-      temp=body;
-          //  res.send(body.Similar.Results[0].Name);
-             
-        }
-    });
-
-
- 
-      
-      res.json({
+          
+            if(body.Similar.Results[0]!=null || body.Similar.Info[0].Type!="unknown"){
+                var count= body.Similar.Results.length;
+            if(count>5)
+            {
+                for(var i=1;i<=5;i++){
+                    if(i==5){    json_final+=body.Similar.Results[i].Name}
+                    else{
+                    json_final+=body.Similar.Results[i].Name+", "}
+                }
+                
+            } 
+               
+          
+     res.json({
       "version": "1.0",
       "response": {
         "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>Some similar movies are "+
-           to_search+
-            ", "+
-         
+           json_final+
             "</speak>"
         }
       }
     });
+            }
+            else{
+                  res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak> Cannot find with this name"
+            
+         
+           
+        }
+      }
+    });
+            }
+     
+          
+            
+             
+        }
+    });
+    
+ 
+
+ 
+      
+    
   }
 });
 
