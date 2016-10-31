@@ -119,7 +119,7 @@ app.post('/result',  function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>Some similar movies are "+
-           temp.Similar.Results[0].Name+
+           to_search+
             ", "+
          
             "</speak>"
