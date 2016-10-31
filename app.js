@@ -21,7 +21,7 @@ app.get('/signup', function(req, res) {
     //var password = req.body.password;
   //  console.log("post received: %s %s", username, password);
     json_final="";
-    to_search="Fast and furious";
+    to_search="hobbit";
    request({
         url: "http://www.tastekid.com/api/similar?q=movie:"+to_search+"&type=movies&k=245364-testapp-KMQ4HDHR",
         json: true
@@ -30,7 +30,7 @@ app.get('/signup', function(req, res) {
 
         if (!error && response.statusCode === 200) {
           
-            if(body.Similar.Results[0]!=null || body.Similar.Info[0].Type!="unkown"){
+            if(body.Similar.Results.length!=0){
                 var count= body.Similar.Results.length;
             if(count>5)
             {
@@ -56,6 +56,7 @@ app.get('/signup', function(req, res) {
       }
     });
             }
+             else if(body.Similar.Results.length==0){res.send("none");}
             else{
                   res.json({
       "version": "1.0",
@@ -137,10 +138,20 @@ app.post('/result',  function(req, res) {
   else if (req.body.request.type === 'IntentRequest' &&
            req.body.request.intent.name === 'getsimilarmovies') {
 
-    if (!req.body.request.intent.slots.Day ||
-        !req.body.request.intent.slots.Day.value) {
-      // Handle this error by producing a response like:
-      // "Hmm, what day do you want to know the forecast for?"
+    if (!req.body.request.intent.slots.movie_name ||
+        !req.body.request.intent.slots.movie_name.value) {
+      res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Tell me the Movie name<speak>"
+          
+        }
+      }
+    });
+      
     }
     to_search = req.body.request.intent.slots.movie_name.value;
       console.log("received= "+to_search);
@@ -154,17 +165,24 @@ app.post('/result',  function(req, res) {
 
         if (!error && response.statusCode === 200) {
           
-            if(body.Similar.Results[0]!=null || body.Similar.Info[0].Type!="unknown"){
+            if(body.Similar.Results.length!=0 ){
                 var count= body.Similar.Results.length;
             if(count>5)
             {
                 for(var i=1;i<=5;i++){
-                    if(i==5){    json_final+=body.Similar.Results[i].Name}
+                    if(i==5){    json_final+="and "+body.Similar.Results[i].Name}
                     else{
                     json_final+=body.Similar.Results[i].Name+", "}
                 }
                 
-            } 
+            }
+            else{
+                for(var i=1;i<=count;i++){
+                    if(i==count){    json_final+="and "+body.Similar.Results[i].Name}
+                    else{
+                    json_final+=body.Similar.Results[i].Name+", "}
+                }
+            }
                
           
      res.json({
@@ -180,14 +198,14 @@ app.post('/result',  function(req, res) {
       }
     });
             }
-            else{
+            else if(body.Similar.Results.length==0){
                   res.json({
       "version": "1.0",
       "response": {
         "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak> Cannot find with this name"
+          "ssml": "<speak>Sorry no results<speak>"
             
          
            
