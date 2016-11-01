@@ -106,7 +106,7 @@ app.post('/result',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to top box, here you can check similar movies, books and movie ratings</speak>"
+          "ssml": "<speak>Welcome to top box, start by asking alexa similar movies to, similar books to, similar tv shows to and ratings of</speak>"
           
         }
       }
@@ -122,10 +122,10 @@ app.post('/result',  function(req, res) {
       res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": true,
+        "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the movie name</speak>"
+          "ssml": "<speak>Please include the movie name for example, similar movies to harry potter</speak>"
           
         }
       }
@@ -216,10 +216,10 @@ app.post('/result',  function(req, res) {
       res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": true,
+        "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the book name</speak>"
+          "ssml": "<speak>Please include the book name for example, similar books to some book name</speak>"
           
         }
       }
@@ -310,10 +310,10 @@ app.post('/result',  function(req, res) {
       res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": true,
+        "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the show name</speak>"
+          "ssml": "<speak>Please include the show name for example, similar tvshows like Stranger things</speak>"
           
         }
       }
@@ -404,10 +404,10 @@ app.post('/result',  function(req, res) {
       res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": true,
+        "shouldEndSession": false
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the movie name to know ratings</speak>"
+          "ssml": "<speak>Please include the movie name for example, ratings of hobbit</speak>"
           
         }
       }
