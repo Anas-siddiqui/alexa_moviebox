@@ -15,42 +15,9 @@ var app = express();
 var to_search="";
  var final_result;
 var json_final="";
-var sid="";
-
-app.get('/signup', function(req, res) {
-   // var username = req.body.username;
-    //var password = req.body.password;
-  //  console.log("post received: %s %s", username, password);
-    json_final="";
-    to_search="hobbit";
-   request({
-        url: "http://www.omdbapi.com/?t=hobbit&y=&plot=short&r=json",
-       //"http://www.tastekid.com/api/similar?q=movie:"+to_search+"&type=movies&k=245364-testapp-KMQ4HDHR",
-        json: true
-    }, function (error, response, body) {
-       
-
-        if (!error && response.statusCode === 200) {
-            res.send(body.imdbRating);
-    //    res.send(JSON.stringify(body));
-         
-          
-            
-          
-           
-     
-          
-            
-             
-        }
-    });
-    
-      
 
 
-    
 
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -86,16 +53,10 @@ function requestVerifier(req, res, next) {
         }
     );
 }
-  function get_movies(req, res, next) {
-
-      
-    
-}  
-
-
+  
 // catch 404 and forward to error handler
 
-app.post('/result',  function(req, res) {
+app.post('/skill',  function(req, res) {
     // We'll fill this out later!
    // res.json({ hello: 'world' });
    var temp;
@@ -106,7 +67,7 @@ app.post('/result',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to top box, start by asking alexa for movies like  <break time=\"0.5s\"/> , books like  <break time=\"0.5s\"/> , tv shows like <break time=\"0.5s\"/>  and ratings of</speak>"
+          "ssml": "<speak>Welcome to top box, start by asking alexa for movies like, books like , tv shows like and ratings of</speak>"
           
         }
       }
