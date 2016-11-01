@@ -86,7 +86,7 @@ app.post('/skill',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the movie name for example, similar movies to harry potter</speak>"
+          "ssml": "<speak>Please include the movie name for example, movies like harry potter</speak>"
           
         }
       }
@@ -180,7 +180,7 @@ app.post('/skill',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the book name for example, similar books to some book name</speak>"
+          "ssml": "<speak>Please include the book name for example, books like homeland</speak>"
           
         }
       }
@@ -274,7 +274,7 @@ app.post('/skill',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the show name for example, similar tvshows like Stranger things</speak>"
+          "ssml": "<speak>Please include the show name for example, tvshows like Stranger things</speak>"
           
         }
       }
@@ -365,11 +365,13 @@ app.post('/skill',  function(req, res) {
       res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": false
+        "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>Please include the movie name for example, ratings of hobbit</speak>"
-          
+            
+         
+           
         }
       }
     });
