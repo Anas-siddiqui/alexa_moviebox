@@ -436,12 +436,13 @@ app.post('/skill',  function(req, res) {
       
     
   }}
-     else if (req.body.request.type === 'IntentRequest' &&
+    
+    else if (req.body.request.type === 'IntentRequest' &&
            req.body.request.intent.name === 'getstorylinefull') {
       
 
-    if (!req.body.request.intent.slots.full_story_name ||
-        !req.body.request.intent.slots.full_story_name.value) {
+    if (!req.body.request.intent.slots.full_name ||
+        !req.body.request.intent.slots.full_name.value) {
       
       res.json({
       "version": "1.0",
@@ -449,7 +450,7 @@ app.post('/skill',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please include the name for example, full storyline of hobbit</speak>"
+          "ssml": "<speak>Please include the movie name or tv show name for example, full storyline of hobbit</speak>"
             
          
            
@@ -459,7 +460,7 @@ app.post('/skill',  function(req, res) {
       
     }
       else{
-    to_search = req.body.request.intent.slots.rating_name.value;
+    to_search = req.body.request.intent.slots.full_name.value;
       console.log("received= "+to_search);
      json_final="";
 
@@ -481,7 +482,7 @@ app.post('/skill',  function(req, res) {
         "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>The storyline of "+body.Title+" is "+
+          "ssml": "<speak>Storyline of "+body.Title+" "+
             body.Plot+
           
          "</speak>"
@@ -496,7 +497,7 @@ app.post('/skill',  function(req, res) {
         "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Sorry no such movie or tvshow</speak>"
+          "ssml": "<speak>Sorry no such movie or tv show</speak>"
             
          
            
@@ -517,89 +518,9 @@ app.post('/skill',  function(req, res) {
       
     
   }}
-    else if (req.body.request.type === 'IntentRequest' &&
-           req.body.request.intent.name === 'getstorylineshort') {
-      
-
-    if (!req.body.request.intent.slots.short_story_name ||
-        !req.body.request.intent.slots.short_story_name.value) {
-      
-      res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>Please include the name for example, short storyline of hobbit</speak>"
-            
-         
-           
-        }
-      }
-    });
-      
-    }
-      else{
-    to_search = req.body.request.intent.slots.rating_name.value;
-      console.log("received= "+to_search);
-     json_final="";
-
-    request({
-        url: "http://www.omdbapi.com/?t="+to_search+"&y=&plot=short&r=json",
-        json: true
-    }, function (error, response, body) {
-       
-
-        if (!error && response.statusCode === 200) {
-          
-            if(body.Response!="False"){
-                
-           
-          
-     res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": true,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>The storyline of "+body.Title+" is "+
-            body.Plot+
-          
-         "</speak>"
-        }
-      }
-    });
-            }
-            else if(body.Response=="False"){
-                  res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": true,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>Sorry no such movie or tvshow</speak>"
-            
-         
-           
-        }
-      }
-    });
-            }
      
-          
-            
-             
-        }
-    });
-    
- 
-
- 
-      
-    
-  }}
-    
-    
+     
+  
     
     
     
