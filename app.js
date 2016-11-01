@@ -106,7 +106,7 @@ app.post('/result',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": '<speak>Welcome to top box, start by asking alexa for movies like  <break time=/"0.5s"/> , books like  <break time="0.5s"/> , tv shows like <break time="0.5s"/>  and ratings of</speak>'
+          "ssml": "<speak>Welcome to top box, start by asking alexa for movies like  <break time=\"0.5s\"/> , books like  <break time=\"0.5s\"/> , tv shows like <break time=\"0.5s\"/>  and ratings of</speak>"
           
         }
       }
