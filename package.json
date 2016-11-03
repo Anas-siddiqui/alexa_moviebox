@@ -1,6 +1,6 @@
 {
-  "name": "Alexa_app",
-  "version": "0.0.0",
+  "name": "alexa_app",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -15,5 +15,18 @@
     "morgan": "~1.7.0",
     "request": "^2.76.0",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "description": "Alexa skill : Topbox",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anas-siddiqui/alexa_moviebox.git"
+  },
+  "author": "Anas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anas-siddiqui/alexa_moviebox/issues"
+  },
+  "homepage": "https://github.com/Anas-siddiqui/alexa_moviebox#readme"
 }

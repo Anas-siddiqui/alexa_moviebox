@@ -39,7 +39,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 function requestVerifier(req, res, next) {
-
     alexaVerifier(
         req.headers.signaturecertchainurl,
         req.headers.signature,
@@ -56,7 +55,7 @@ function requestVerifier(req, res, next) {
   
 // catch 404 and forward to error handler
 
-app.post('/skill',  function(req, res) {
+app.post('/skill',requestVerifier,  function(req, res) {
     // We'll fill this out later!
    // res.json({ hello: 'world' });
    var temp;
