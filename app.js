@@ -67,12 +67,68 @@ app.post('/skill',  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to top box, start by asking alexa for movies like, books like , tv shows like and ratings of</speak>"
+          "ssml": "<speak>Welcome to top box, here you can ask for recommended movies, tv show, books, their storyline and their ratings</speak>"
           
         }
       }
     }); }
-  else if (req.body.request.type === 'SessionEndedRequest') { /* ... */ }
+  else if (req.body.request.type === 'IntentRequest' &&
+           req.body.request.intent.name === 'AMAZON.CancelIntent') 
+  { 
+      
+  res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>hmm see you soon</speak>"
+          
+        }
+      }
+    });
+      
+  
+      
+  }
+    else if (req.body.request.type === 'IntentRequest' &&
+           req.body.request.intent.name === 'AMAZON.StopIntent') 
+  { 
+      
+  res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>hmm see you soon</speak>"
+          
+        }
+      }
+    });
+      
+  
+      
+  }
+    else if (req.body.request.type === 'IntentRequest' &&
+           req.body.request.intent.name === 'AMAZON.HelpIntent') 
+  { 
+      
+  res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Start by asking for Movies similar to the hobbit or for storyline of the hobbit</speak>"
+          
+        }
+      }
+    });
+      
+  
+      
+  }
   else if (req.body.request.type === 'IntentRequest' &&
            req.body.request.intent.name === 'getsimilarmovies') {
       
