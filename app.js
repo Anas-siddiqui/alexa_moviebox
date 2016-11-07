@@ -196,7 +196,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
       "title": body.Similar.Info[0].Name,
       "content": "Some similar movies are "+json_final
     }
-    });
+    }});
             }
             else if(body.Similar.Results.length==0){
                   res.json({
