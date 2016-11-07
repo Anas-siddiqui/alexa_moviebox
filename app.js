@@ -288,7 +288,11 @@ app.post('/skill',requestVerifier,  function(req, res) {
           "ssml": "<speak>Some similar books to "+body.Similar.Info[0].Name+" are "+
            json_final+
             "</speak>"
-        }
+        },"card": {
+      "type": "Simple",
+      "title": body.Similar.Info[0].Name,
+      "content": "Some similar books are "+json_final
+    }
       }
     });
             }
@@ -382,7 +386,11 @@ app.post('/skill',requestVerifier,  function(req, res) {
           "ssml": "<speak>Some similar shows to "+body.Similar.Info[0].Name+" are "+
            json_final+
             "</speak>"
-        }
+        },"card": {
+      "type": "Simple",
+      "title": body.Similar.Info[0].Name,
+      "content": "Some similar tv shows are "+json_final
+    }
       }
     });
             }
@@ -463,7 +471,15 @@ app.post('/skill',requestVerifier,  function(req, res) {
             body.imdbRating+
           
          "</speak>"
-        }
+        },"card": {
+      "type": "Standard",
+      "title": body.Title,
+      "text": "Genre: "+body.Genre+"\n"+ "Plot: "+body.Plot+"\n"+"Rating: "+body.imdbRating,
+      "image": {
+        "smallImageUrl": body.Poster
+       
+      }
+    }
       }
     });
             }
