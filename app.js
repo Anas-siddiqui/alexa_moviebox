@@ -474,7 +474,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         },"card": {
       "type": "Standard",
       "title": body.Title,
-      "text": "Genre: "+body.Genre+"\n"+"Year: "+body.Year+ "Plot: "+body.Plot+"\n"
+      "text": "Genre: "+body.Genre+"\n"+"Year: "+body.Year+"\n"+"Plot: "+body.Plot+"\n"
             +"Rating: "+body.imdbRating,
       "image": {
         "smallImageUrl": body.Poster
