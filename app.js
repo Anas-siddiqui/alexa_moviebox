@@ -561,7 +561,15 @@ app.post('/skill',requestVerifier,  function(req, res) {
             body.Plot+
           
          "</speak>"
-        }
+        },"card": {
+      "type": "Standard",
+      "title": body.Title,
+      "text": "Genre: "+body.Genre+"\n"+"Rating: "+body.imdbRating,
+      "image": {
+        "smallImageUrl": body.Poster
+       
+      }
+    }
       }
     });
             }
