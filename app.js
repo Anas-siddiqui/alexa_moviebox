@@ -190,8 +190,12 @@ app.post('/skill',requestVerifier,  function(req, res) {
           "ssml": "<speak>Some similar movies to "+body.Similar.Info[0].Name+" are "+
            json_final+
             "</speak>"
-        }
-      }
+        },
+          "card": {
+      "type": "Simple",
+      "title": body.Similar.Info[0].Name,
+      "content": "Some similar movies are "+json_final
+    }
     });
             }
             else if(body.Similar.Results.length==0){
