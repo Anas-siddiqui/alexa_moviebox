@@ -474,7 +474,8 @@ app.post('/skill',requestVerifier,  function(req, res) {
         },"card": {
       "type": "Standard",
       "title": body.Title,
-      "text": "Genre: "+body.Genre+"\n"+ "Plot: "+body.Plot+"\n"+"Rating: "+body.imdbRating,
+      "text": "Genre: "+body.Genre+"\n"+"Year: "+body.Year+ "Plot: "+body.Plot+"\n"
+            +"Rating: "+body.imdbRating,
       "image": {
         "smallImageUrl": body.Poster
        
@@ -564,7 +565,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         },"card": {
       "type": "Standard",
       "title": body.Title,
-      "text": "Genre: "+body.Genre+"\n"+"Rating: "+body.imdbRating,
+      "text": "Genre: "+body.Genre+"\n"+"Year: "+body.Year+"\n"+"Rating: "+body.imdbRating,
       "image": {
         "smallImageUrl": body.Poster
        
